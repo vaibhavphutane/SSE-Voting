@@ -20,12 +20,12 @@
 .counter {
   font-size: 2rem;
   font-weight: bold;
-  color: blue;
+  color: rgb(25, 118, 210);
 }
 
 .btn {
   padding: 1rem;
-  background-color: cornflowerblue;
+  background-color: #bd4257;
   color: white;
   outline: none;
   appearance: none;
@@ -33,6 +33,7 @@
   border-radius: 0.5rem;
   margin: 10px;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .DashboardContainer {
@@ -44,4 +45,39 @@
 
 .Dashboard {
   text-align: center;
+}
+
+.header {
+  background-color: rgb(25, 118, 210);
+  height: 64px;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.header h1 {
+  margin: 0;
+  display: flex;
+  color: #fff;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.officeName {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: #bd4257;
+  color: #fff;
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  font-weight: 600;
 }
