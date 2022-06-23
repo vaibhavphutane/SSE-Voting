@@ -1,1 +1,1 @@
-export const API_URL = "https://best-thoughtworks-office.netlify.app";
+export const API_URL = "https://sse-voting-server.herokuapp.com";
