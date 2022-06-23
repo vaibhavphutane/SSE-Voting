@@ -1,9 +1,10 @@
 import React from "react";
 import "./App.css";
+import { API_URL } from "./Constants";
 
 const Voting = ({ offices }) => {
   const upvoteHandler = async (id) => {
-    await fetch("https://best-thoughtworks-office.netlify.app/upvote", {
+    await fetch(`${API_URL}/upvote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

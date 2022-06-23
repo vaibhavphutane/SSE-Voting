@@ -4,6 +4,7 @@ import "./App.css";
 import Dashboard from "./Dashboard";
 import Voting from "./Voting";
 import Header from "./components/Header";
+import { API_URL } from "./Constants";
 
 function App() {
   const [listening, setListening] = useState(false);
@@ -11,9 +12,7 @@ function App() {
 
   useEffect(() => {
     if (!listening) {
-      const events = new EventSource(
-        "https://best-thoughtworks-office.netlify.app/getOffices"
-      );
+      const events = new EventSource(`${API_URL}/getOffices`);
       events.onmessage = (event) => {
         const updatedOffices = JSON.parse(event.data);
         setOffices(updatedOffices);

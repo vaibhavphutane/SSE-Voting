@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from "react";
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+import { API_URL } from "./Constants";
 
 const Dashboard = ({ offices }) => {
   const [options, setOption] = useState({
     chart: {
-      type: 'column'
+      type: "column",
     },
     title: {
-      text: 'Votes'
+      text: "Thoughtworks office votes",
     },
     yAxis: {
       title: {
-        text: 'Votes'
-      }
-    }
+        text: "Votes",
+      },
+    },
+    xAxis: {
+      type: "category",
+      min: 0,
+      labels: {
+        animate: true,
+      },
+    },
   });
 
   useEffect(() => {
@@ -22,33 +30,32 @@ const Dashboard = ({ offices }) => {
       ...options,
       series: [
         {
-          name: 'Number of Votes', 
-          data: offices.map(of => of.count),
-        }
+          name: "Number of Votes",
+          data: offices.map((of) => [of.name, of.count]),
+          dataSorting: {
+            enabled: true,
+            matchByName: true,
+          },
+        },
       ],
-      xAxis: {
-        categories: offices.map(of => of.name),
-        crosshair: true,
-        title: {
-          text: 'Locations'
-        }
-      }
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offices]);
 
-
-
   const resetHandler = async () => {
-    await fetch('https://best-thoughtworks-office.netlify.app/reset');
-  }
+    await fetch(`${API_URL}/reset`);
+  };
 
-  return (<div className="Dashboard">
-    <div className="DashboardContainer">
-      <HighchartsReact highcharts={Highcharts} options={options} />
+  return (
+    <div className="Dashboard">
+      <div className="DashboardContainer">
+        <HighchartsReact highcharts={Highcharts} options={options} />
+      </div>
+      <button className="btn" onClick={resetHandler}>
+        Reset Chart Data
+      </button>
     </div>
-    <button className="btn" onClick={resetHandler}>Reset</button>
-  </div>)
-}
+  );
+};
 
 export default Dashboard;
