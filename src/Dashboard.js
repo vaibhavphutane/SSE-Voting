@@ -36,6 +36,9 @@ const Dashboard = ({ offices }) => {
             enabled: true,
             matchByName: true,
           },
+          dataLabels: {
+            enabled: true,
+          },
         },
       ],
     });
