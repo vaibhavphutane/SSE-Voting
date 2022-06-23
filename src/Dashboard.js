@@ -3,6 +3,19 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
 const Dashboard = ({ offices }) => {
+  const [options, setOption] = useState({
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Votes'
+    },
+    yAxis: {
+      title: {
+        text: 'Votes'
+      }
+    }
+  });
 
   useEffect(() => {
     setOption({
@@ -20,22 +33,10 @@ const Dashboard = ({ offices }) => {
           text: 'Locations'
         }
       }
-    })
-  }, [offices]);
+    });
+  }, [offices, options]);
 
-  const [options, setOption] = useState({
-    chart: {
-      type: 'column'
-    },
-    title: {
-      text: 'Votes'
-    },
-    yAxis: {
-      title: {
-        text: 'Votes'
-      }
-    }
-  });
+
 
   const resetHandler = async () => {
     await fetch('http://localhost:3030/reset');
