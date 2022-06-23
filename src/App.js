@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Dashboard from './Dashboard';
+import Voting from './Voting';
 
 function App() {
+  const [listening, setListening] = useState(false);
+  const [offices, setOffices] = useState([]);
+
+  useEffect(() => {
+    if (!listening) {
+      const events = new EventSource('http://localhost:3030/getOffices');
+      events.onmessage = (event) => {
+        const updatedOffices = JSON.parse(event.data);
+        setOffices(updatedOffices);
+      };
+      setListening(true);
+    }
+  }, [listening, offices]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Voting offices={offices}/>} />
+          <Route path='/dashboard' element={<Dashboard offices={offices} />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
