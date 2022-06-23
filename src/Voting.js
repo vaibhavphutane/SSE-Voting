@@ -3,7 +3,7 @@ import "./App.css";
 
 const Voting = ({ offices }) => {
   const upvoteHandler = async (id) => {
-    await fetch("http://localhost:3030/upvote", {
+    await fetch("https://best-thoughtworks-office.netlify.app/upvote", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

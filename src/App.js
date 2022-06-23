@@ -11,7 +11,9 @@ function App() {
 
   useEffect(() => {
     if (!listening) {
-      const events = new EventSource("http://localhost:3030/getOffices");
+      const events = new EventSource(
+        "https://best-thoughtworks-office.netlify.app/getOffices"
+      );
       events.onmessage = (event) => {
         const updatedOffices = JSON.parse(event.data);
         setOffices(updatedOffices);

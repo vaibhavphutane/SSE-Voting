@@ -34,12 +34,13 @@ const Dashboard = ({ offices }) => {
         }
       }
     });
-  }, [offices, options]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [offices]);
 
 
 
   const resetHandler = async () => {
-    await fetch('http://localhost:3030/reset');
+    await fetch('https://best-thoughtworks-office.netlify.app/reset');
   }
 
   return (<div className="Dashboard">
